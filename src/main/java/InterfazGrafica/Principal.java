@@ -10,9 +10,14 @@ public class Principal extends javax.swing.JFrame {
     private GestorUsuarios gestorUsuarios;
      
     public Principal(GestorUsuarios gestorUsuarios) {
-        this.gestorUsuarios = gestorUsuarios;
+        GestorUsuarios gestor = new GestorUsuarios();
+        Principal princ = new Principal(gestor);
         initComponents();
         this.setLocationRelativeTo(null);
+    }
+
+    public Principal() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     
@@ -152,6 +157,8 @@ public class Principal extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
+
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

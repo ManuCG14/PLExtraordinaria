@@ -10,10 +10,11 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     
-    public VentanaRegistroCliente() {
+    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios) {
         this.gestorUsuarios = gestorUsuarios;
         initComponents();
     }
+
 
     
     @SuppressWarnings("unchecked")

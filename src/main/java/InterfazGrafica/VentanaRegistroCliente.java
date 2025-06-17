@@ -331,7 +331,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     String telefono = txtTelefono.getText();
     String calle = txtCalle.getText();
     String ciudad = txtCiudad.getText();
-    String pais = txtCodigoPostal.getText(); // Asegúrate si `txtCodigoPostal` es realmente el campo país
+    String pais = txtCodigoPostal.getText(); 
     String numeroTarjeta = txtNumeroTarjeta.getText();
     String nombreTitular = txtTitular.getText();
     String fechaCaducidad = txtFechaCaducidad.getText();
@@ -353,8 +353,10 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     // Registrar cliente
     if (gestorUsuarios.registrarCliente(nuevoCliente)) {
         JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        new IniciarSesion(gestorUsuarios).setVisible(true);
-        dispose();
+        Principal princ = new Principal(gestorUsuarios);
+        princ.setVisible(true);
+        princ.setLocationRelativeTo(null);
+        this.dispose();
     } else {
         JOptionPane.showMessageDialog(this, "Este correo ya está registrado", "Error", JOptionPane.ERROR_MESSAGE);
     }

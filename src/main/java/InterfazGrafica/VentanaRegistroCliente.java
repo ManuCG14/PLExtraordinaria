@@ -1,7 +1,9 @@
 package InterfazGrafica;
 
 import Logica.Cliente;
+import Logica.Direccion;
 import Logica.GestorUsuarios;
+import Logica.TarjetaCredito;
 import javax.swing.JOptionPane;
 
 public class VentanaRegistroCliente extends javax.swing.JFrame {
@@ -39,7 +41,6 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
         btnVIP = new javax.swing.JCheckBox();
         txtCorreo = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtCalle = new javax.swing.JTextField();
         txtNumeroTarjeta = new javax.swing.JTextField();
@@ -49,6 +50,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
         txtTitular = new javax.swing.JTextField();
         btnRegistarse = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtClave = new javax.swing.JPasswordField();
 
         jLabel13.setText("jLabel13");
 
@@ -111,12 +113,6 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
             }
         });
 
-        txtClave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtClaveActionPerformed(evt);
-            }
-        });
-
         txtTelefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtTelefonoActionPerformed(evt);
@@ -175,6 +171,12 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
             }
         });
 
+        txtClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtClaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -189,13 +191,14 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
                         .addGap(33, 33, 33)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(42, 42, 42)
-                                .addComponent(txtClave, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE)
-                                .addGap(42, 42, 42)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(42, 42, 42))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(txtClave))
                         .addGap(53, 53, 53)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -263,9 +266,9 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClave, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -322,7 +325,39 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVIPActionPerformed
 
     private void btnRegistarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistarseActionPerformed
-        // TODO add your handling code here:
+         String nombre = txtNombre.getText();
+    String correo = txtCorreo.getText();
+    String clave = new String(txtClave.getPassword());
+    String telefono = txtTelefono.getText();
+    String calle = txtCalle.getText();
+    String ciudad = txtCiudad.getText();
+    String pais = txtCodigoPostal.getText(); // Asegúrate si `txtCodigoPostal` es realmente el campo país
+    String numeroTarjeta = txtNumeroTarjeta.getText();
+    String nombreTitular = txtTitular.getText();
+    String fechaCaducidad = txtFechaCaducidad.getText();
+    boolean esVIP = btnVIP.isSelected();
+
+    // Validación de campos
+    if (nombre.isEmpty() || correo.isEmpty() || clave.isEmpty() || telefono.isEmpty() ||
+        calle.isEmpty() || ciudad.isEmpty() || pais.isEmpty() || numeroTarjeta.isEmpty() ||
+        nombreTitular.isEmpty() || fechaCaducidad.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Completa todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    // Crear objetos necesarios
+    Direccion direccion = new Direccion(calle, ciudad, pais);
+    TarjetaCredito tarjeta = new TarjetaCredito(nombreTitular, numeroTarjeta, fechaCaducidad);
+    Cliente nuevoCliente = new Cliente(nombre, correo, clave, telefono, direccion, tarjeta, esVIP);
+
+    // Registrar cliente
+    if (gestorUsuarios.registrarCliente(nuevoCliente)) {
+        JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+        new IniciarSesion(gestorUsuarios).setVisible(true);
+        dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Este correo ya está registrado", "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_btnRegistarseActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -361,13 +396,13 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCorreoActionPerformed
 
-    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtClaveActionPerformed
-
     private void txtTelefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTelefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtTelefonoActionPerformed
+
+    private void txtClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtClaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtClaveActionPerformed
 
 
 
@@ -395,7 +430,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField9;
     private javax.swing.JTextField txtCalle;
     private javax.swing.JTextField txtCiudad;
-    private javax.swing.JTextField txtClave;
+    private javax.swing.JPasswordField txtClave;
     private javax.swing.JTextField txtCodigoPostal;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtFechaCaducidad;

@@ -46,5 +46,11 @@ public class Direccion implements Serializable {
         this.ciudad = ciudad;
         this.codigoPostal = codigoPostal;
     }
+
+    public Direccion(String calle, String ciudad, String codigoPostal) {
+        this.calle = calle;
+        this.ciudad = ciudad;
+        this.codigoPostal = codigoPostal;
+    }
     
 }

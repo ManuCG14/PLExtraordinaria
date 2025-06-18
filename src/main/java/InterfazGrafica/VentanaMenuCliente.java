@@ -1,14 +1,17 @@
 package InterfazGrafica;
 
+import Logica.Cliente;
 import Logica.GestorUsuarios;
 
 
 public class VentanaMenuCliente extends javax.swing.JFrame {
 
+    private Cliente clienteActual;
     private GestorUsuarios gestorUsuarios;
 
     public VentanaMenuCliente(GestorUsuarios gestorUsuarios) {
         this.gestorUsuarios = gestorUsuarios;
+        this.clienteActual = clienteActual;
         initComponents();
     }
 
@@ -126,7 +129,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarEventosActionPerformed
-        BuscarEventos buscar = new BuscarEventos();
+        BuscarEventos buscar = new BuscarEventos(gestorUsuarios, clienteActual);
         buscar.setVisible(true);
         buscar.setLocationRelativeTo(null);
         this.dispose();

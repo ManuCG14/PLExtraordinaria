@@ -1,17 +1,37 @@
 package InterfazGrafica;
 
+import Logica.Evento;
+import Logica.GestorEventos;
 import Logica.GestorUsuarios;
-
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class GestionEventos extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
     
-    public GestionEventos() {
+    public GestionEventos(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.gestorEventos = gestorEventos; 
         initComponents();
+        cargarTablaEventos();
     }
+    private void cargarTablaEventos() {
+        DefaultTableModel modelo = (DefaultTableModel) tablaEventos.getModel();
+        modelo.setRowCount(0); // Limpiar la tabla
 
-
+        List<Evento> lista = gestorEventos.listarEventos();
+        for (Evento e : lista) {
+            modelo.addRow(new Object[]{
+                e.getTitulo(),
+                e.getTipo(),
+                e.getDireccion().getCiudad(),
+                e.getPrecio()
+            });
+        }
+}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -81,9 +101,9 @@ public class GestionEventos extends javax.swing.JFrame {
                     .addComponent(btnEliminar)
                     .addComponent(btnAgregar)
                     .addComponent(btnEditar, javax.swing.GroupLayout.Alignment.LEADING))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 45, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(65, 65, 65))
+                .addGap(52, 52, 52))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -99,11 +119,12 @@ public class GestionEventos extends javax.swing.JFrame {
                         .addGap(41, 41, 41)
                         .addComponent(btnEditar)
                         .addGap(37, 37, 37)
-                        .addComponent(btnEliminar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                        .addComponent(btnEliminar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addComponent(btnSalir)
                 .addGap(19, 19, 19))
         );
@@ -123,15 +144,74 @@ public class GestionEventos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-        // TODO add your handling code here:
+        int fila = tablaEventos.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un evento para eliminar.");
+            return;
+        }
+
+        String titulo = (String) tablaEventos.getValueAt(fila, 0);
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el evento?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            boolean eliminado = gestorEventos.eliminarEvento(titulo);
+            if (eliminado) {
+                cargarTablaEventos();
+                JOptionPane.showMessageDialog(this, "Evento eliminado con éxito.");
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el evento.");
+            }
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        String titulo = JOptionPane.showInputDialog(this, "Título del evento:");
+        String tipo = JOptionPane.showInputDialog(this, "Tipo del evento:");
+        String ciudad = JOptionPane.showInputDialog(this, "Ciudad:");
+        double precio;
+
+        try {
+            precio = Double.parseDouble(JOptionPane.showInputDialog(this, "Precio:"));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Precio inválido.");
+            return;
+        }
+
+        Evento nuevo = new Evento(titulo, tipo, precio, new Logica.Direccion(ciudad));
+        gestorEventos.agregarEvento(nuevo);
+        cargarTablaEventos();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        int fila = tablaEventos.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione un evento para editar.");
+            return;
+        }
+
+        String tituloOriginal = (String) tablaEventos.getValueAt(fila, 0);
+
+        String nuevoTitulo = JOptionPane.showInputDialog(this, "Nuevo título:", tituloOriginal);
+        String tipo = JOptionPane.showInputDialog(this, "Nuevo tipo:");
+        String ciudad = JOptionPane.showInputDialog(this, "Nueva ciudad:");
+        double precio;
+
+        try {
+            precio = Double.parseDouble(JOptionPane.showInputDialog(this, "Nuevo precio:"));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Precio inválido.");
+            return;
+        }
+
+        Evento modificado = new Evento(nuevoTitulo, tipo, precio, new Logica.Direccion(ciudad));
+        boolean resultado = gestorEventos.modificarEvento(tituloOriginal, modificado);
+
+        if (resultado) {
+            cargarTablaEventos();
+            JOptionPane.showMessageDialog(this, "Evento modificado con éxito.");
+        } else {
+            JOptionPane.showMessageDialog(this, "No se encontró el evento original.");
+        }
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

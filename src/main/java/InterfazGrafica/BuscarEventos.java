@@ -1,17 +1,49 @@
 package InterfazGrafica;
 
-import Logica.GestorUsuarios;
-
+import Logica.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.time.LocalDateTime;
+import java.util.List;
 
 public class BuscarEventos extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
+    private Cliente clienteActual;
 
-    public BuscarEventos() {
+    public BuscarEventos(GestorUsuarios gestorUsuarios, Cliente clienteActual) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.clienteActual = clienteActual;
+        this.gestorEventos = new GestorEventos();
+        this.gestorReservas = new GestorReservas();
         initComponents();
+        mostrarEventos(gestorEventos.listarEventos());
     }
 
+    private void mostrarEventos(List<Evento> eventos) {
+        DefaultTableModel modelo = (DefaultTableModel) tablaEventos.getModel();
+        modelo.setRowCount(0);  // Limpiar tabla
+        for (Evento e : eventos) {
+            modelo.addRow(new Object[]{e.getTitulo(), e.getTipo(), e.getDireccion().getCiudad()});
+        }
+    }
 
+    private Evento obtenerEventoSeleccionado() {
+        int fila = tablaEventos.getSelectedRow();
+        if (fila == -1) {
+            return null;
+        }
+        String titulo = (String) tablaEventos.getValueAt(fila, 0);
+        for (Evento e : gestorEventos.listarEventos()) {
+            if (e.getTitulo().equalsIgnoreCase(titulo)) {
+                return e;
+            }
+        }
+        return null;
+    }
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -135,15 +167,55 @@ public class BuscarEventos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarTipoActionPerformed
-        // TODO add your handling code here:
+        String tipo = txtBuscar.getText().trim();
+        if (tipo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un tipo para buscar.");
+            return;
+        }
+        List<Evento> eventosFiltrados = gestorEventos.buscarPorTipo(tipo);
+        mostrarEventos(eventosFiltrados);
     }//GEN-LAST:event_btnBuscarTipoActionPerformed
 
     private void btnMostrarEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarEventosActionPerformed
-        // TODO add your handling code here:
+        mostrarEventos(gestorEventos.listarEventos());
     }//GEN-LAST:event_btnMostrarEventosActionPerformed
 
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        // TODO add your handling code here:
+        Evento evento = obtenerEventoSeleccionado();
+        if (evento == null) {
+            JOptionPane.showMessageDialog(this, "Seleccione un evento para reservar.");
+            return;
+        }
+
+        // Pedir fecha de reserva y cantidad de entradas
+        String fechaStr = JOptionPane.showInputDialog(this, "Ingrese fecha y hora de reserva (formato: yyyy-MM-ddTHH:mm):");
+        if (fechaStr == null || fechaStr.trim().isEmpty()) {
+            return; // Canceló
+        }
+        LocalDateTime fechaSeleccionada;
+        try {
+            fechaSeleccionada = LocalDateTime.parse(fechaStr.trim());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Formato de fecha incorrecto.");
+            return;
+        }
+
+        String cantidadStr = JOptionPane.showInputDialog(this, "Ingrese cantidad de entradas:");
+        int cantidadEntradas;
+        try {
+            cantidadEntradas = Integer.parseInt(cantidadStr.trim());
+            if (cantidadEntradas <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Cantidad inválida.");
+            return;
+        }
+
+        try {
+            gestorReservas.añadirReserva(clienteActual, evento, fechaSeleccionada, cantidadEntradas);
+            JOptionPane.showMessageDialog(this, "Reserva realizada correctamente.");
+        } catch (IllegalArgumentException ex) {
+            JOptionPane.showMessageDialog(this, "Error al reservar: " + ex.getMessage());
+        }
     }//GEN-LAST:event_btnReservarActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed

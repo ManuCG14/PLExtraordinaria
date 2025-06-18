@@ -1,6 +1,5 @@
 package Logica;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -9,11 +8,12 @@ public class GestorEventos {
     private List<Evento> eventos;
 
     public GestorEventos() {
-        this.eventos = new ArrayList<>();
+        this.eventos = PersistenciaEventos.cargarEventos();
     }
 
     public void agregarEvento(Evento evento) {
         eventos.add(evento);
+        PersistenciaEventos.guardarEventos(eventos);
     }
 
     public boolean eliminarEvento(String titulo) {
@@ -22,6 +22,7 @@ public class GestorEventos {
             Evento e = it.next();
             if (e.getTitulo().equalsIgnoreCase(titulo)) {
                 it.remove();
+                PersistenciaEventos.guardarEventos(eventos);
                 return true;
             }
         }
@@ -32,6 +33,7 @@ public class GestorEventos {
         for (int i = 0; i < eventos.size(); i++) {
             if (eventos.get(i).getTitulo().equalsIgnoreCase(tituloOriginal)) {
                 eventos.set(i, eventoModificado);
+                PersistenciaEventos.guardarEventos(eventos);
                 return true;
             }
         }
@@ -41,7 +43,7 @@ public class GestorEventos {
     public List<Evento> listarEventos() {
         return new ArrayList<>(eventos);
     }
-    
+
     public List<Evento> buscarPorCiudad(String ciudad) {
         List<Evento> resultado = new ArrayList<>();
         for (Evento e : eventos) {
@@ -61,5 +63,4 @@ public class GestorEventos {
         }
         return resultado;
     }
-
 }

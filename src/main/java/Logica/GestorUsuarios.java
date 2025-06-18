@@ -13,6 +13,7 @@ public class GestorUsuarios {
         administradores = new ArrayList<>();
         administradores.add(new Administrador("admin@javaevents.com", "admin"));
     }
+    
 
     public boolean registrarCliente(Cliente cliente) {
         if (buscarClientePorCorreo(cliente.getCorreo()) == null) {

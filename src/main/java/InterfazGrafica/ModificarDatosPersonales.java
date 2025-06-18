@@ -1,9 +1,12 @@
 package InterfazGrafica;
 
+import Logica.GestorUsuarios;
+
 
 public class ModificarDatosPersonales extends javax.swing.JFrame {
 
-
+    private GestorUsuarios gestorUsuarios;
+    
     public ModificarDatosPersonales() {
         initComponents();
     }
@@ -242,9 +245,9 @@ public class ModificarDatosPersonales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Principal princ = new Principal();
-        princ.setVisible(true);
-        princ.setLocationRelativeTo(null);
+        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios);
+        ventclt.setVisible(true);
+        ventclt.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 

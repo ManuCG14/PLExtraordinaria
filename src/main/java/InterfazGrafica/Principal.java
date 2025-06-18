@@ -10,8 +10,7 @@ public class Principal extends javax.swing.JFrame {
     private GestorUsuarios gestorUsuarios;
      
     public Principal(GestorUsuarios gestorUsuarios) {
-        GestorUsuarios gestor = new GestorUsuarios();
-        Principal princ = new Principal(gestor);
+        this.gestorUsuarios = gestorUsuarios; 
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -138,6 +137,7 @@ public class Principal extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Bienvenido administrador.");
             VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios);
             ventana.setVisible(true);
+            ventana.setLocationRelativeTo(null);
             this.dispose();
         } else {
             JOptionPane.showMessageDialog(this, "Correo o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);

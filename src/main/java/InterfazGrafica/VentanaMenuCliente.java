@@ -83,14 +83,11 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBuscarEventos)
                     .addComponent(btnReseñas))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 79, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 90, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnModificarDatos)
-                        .addGap(119, 119, 119))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnConsultarReservas)
-                        .addGap(108, 108, 108))))
+                    .addComponent(btnConsultarReservas, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnModificarDatos, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addGap(108, 108, 108))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir)
@@ -158,7 +155,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
 
     private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
         ModificarDatosPersonales modificar = new ModificarDatosPersonales();
-        modificar:setVisible(true);
+        modificar.setVisible(true);
         modificar.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnModificarDatosActionPerformed

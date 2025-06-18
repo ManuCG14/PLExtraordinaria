@@ -364,7 +364,10 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistarseActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Principal princ = new Principal(gestorUsuarios);
+        princ.setVisible(true);
+        princ.setLocationRelativeTo(null);
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txtCodigoPostalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoPostalActionPerformed

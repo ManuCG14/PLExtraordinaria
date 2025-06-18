@@ -155,6 +155,7 @@ public class Principal extends javax.swing.JFrame {
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
         VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios);
         ventana.setVisible(true);
+        ventana.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnRegistrarseActionPerformed
 

@@ -1,9 +1,12 @@
 package InterfazGrafica;
 
+import Logica.GestorUsuarios;
+
 
 public class ConsultaReservas extends javax.swing.JFrame {
 
-
+    private GestorUsuarios gestorUsuarios;
+    
     public ConsultaReservas() {
         initComponents();
     }
@@ -79,9 +82,9 @@ public class ConsultaReservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Principal princ = new Principal();
-        princ.setVisible(true);
-        princ.setLocationRelativeTo(null);
+        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios);
+        ventadm.setVisible(true);
+        ventadm.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 

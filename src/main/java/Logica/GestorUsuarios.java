@@ -8,16 +8,16 @@ public class GestorUsuarios {
     private List<Administrador> administradores;
 
     public GestorUsuarios() {
-        clientes = new ArrayList<>();
+        // Cargar clientes desde archivo
+        clientes = PersistenciaClientes.cargarClientes();
         administradores = new ArrayList<>();
-
-
         administradores.add(new Administrador("admin@javaevents.com", "admin"));
     }
 
     public boolean registrarCliente(Cliente cliente) {
         if (buscarClientePorCorreo(cliente.getCorreo()) == null) {
             clientes.add(cliente);
+            PersistenciaClientes.guardarClientes(clientes);
             return true;
         }
         return false;
@@ -64,13 +64,14 @@ public class GestorUsuarios {
             administradores.add(administrador);
             return true;
         }
-        return false; 
+        return false;
     }
 
     public boolean modificarCliente(String correoOriginal, Cliente clienteModificado) {
         for (int i = 0; i < clientes.size(); i++) {
             if (clientes.get(i).getCorreo().equalsIgnoreCase(correoOriginal)) {
                 clientes.set(i, clienteModificado);
+                PersistenciaClientes.guardarClientes(clientes);
                 return true;
             }
         }
@@ -81,6 +82,7 @@ public class GestorUsuarios {
         for (int i = 0; i < clientes.size(); i++) {
             if (clientes.get(i).getCorreo().equalsIgnoreCase(correo)) {
                 clientes.remove(i);
+                PersistenciaClientes.guardarClientes(clientes);
                 return true;
             }
         }
@@ -96,5 +98,4 @@ public class GestorUsuarios {
         }
         return false;
     }
-
 }

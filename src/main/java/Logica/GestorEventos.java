@@ -62,47 +62,4 @@ public class GestorEventos {
         return resultado;
     }
 
-    public List<Evento> buscarPorFecha(LocalDate fechaDesde) {
-        List<Evento> resultado = new ArrayList<>();
-        for (Evento e : eventos) {
-            for (LocalDate f : e.getFechasComoLocalDate()) {
-                if (!f.isBefore(fechaDesde)) { 
-                    resultado.add(e);
-                    break; 
-                }
-            }
-        }
-        return resultado;
-    }
-
-    public List<Evento> buscarEventosCombinados(String ciudad, String tipo, LocalDate fechaDesde) {
-        List<Evento> resultado = new ArrayList<>();
-        for (Evento e : eventos) {
-            boolean coincide = true;
-
-            if (ciudad != null && !e.getDireccion().getCiudad().equalsIgnoreCase(ciudad)) {
-                coincide = false;
-            }
-            if (tipo != null && !e.getTipo().equalsIgnoreCase(tipo)) {
-                coincide = false;
-            }
-            if (fechaDesde != null) {
-                boolean fechaOk = false;
-                for (LocalDate f : e.getFechasComoLocalDate()) {
-                    if (!f.isBefore(fechaDesde)) {
-                        fechaOk = true;
-                        break;
-                    }
-                }
-                if (!fechaOk) {
-                    coincide = false;
-                }
-            }
-
-            if (coincide) {
-                resultado.add(e);
-            }
-        }
-        return resultado;
-    }
 }

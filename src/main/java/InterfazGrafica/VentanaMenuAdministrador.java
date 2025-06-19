@@ -160,7 +160,7 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnConsultaUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaUsuariosActionPerformed
-        ConsultaUsuarios consultaUsuarios = new ConsultaUsuarios();
+        ConsultaUsuarios consultaUsuarios = new ConsultaUsuarios(gestorUsuarios, gestorEventos, clienteActual);
         consultaUsuarios.setVisible(true);
         consultaUsuarios.setLocationRelativeTo(null);
         this.dispose();

@@ -76,6 +76,7 @@ public class GestorUsuarios {
                 break;
         }
     }
+        PersistenciaClientes.guardarClientes(clientes);
 }
 
 

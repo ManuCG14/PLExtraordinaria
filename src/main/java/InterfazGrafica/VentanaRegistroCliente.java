@@ -2,6 +2,7 @@ package InterfazGrafica;
 
 import Logica.Cliente;
 import Logica.Direccion;
+import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 import Logica.TarjetaCredito;
 import javax.swing.JOptionPane;
@@ -9,9 +10,11 @@ import javax.swing.JOptionPane;
 public class VentanaRegistroCliente extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
     
-    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios) {
+    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
         this.gestorUsuarios = gestorUsuarios;
+        this.gestorEventos = gestorEventos;
         initComponents();
     }
 
@@ -354,7 +357,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     // Registrar cliente
     if (gestorUsuarios.registrarCliente(nuevoCliente)) {
         JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        Principal princ = new Principal(gestorUsuarios);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();
@@ -364,7 +367,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistarseActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Principal princ = new Principal(gestorUsuarios);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();

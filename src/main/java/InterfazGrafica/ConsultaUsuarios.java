@@ -1,11 +1,13 @@
 package InterfazGrafica;
 
+import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 
 
 public class ConsultaUsuarios extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
 
     public ConsultaUsuarios() {
         initComponents();
@@ -133,7 +135,7 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarCorreoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios);
+        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos);
         ventadm.setVisible(true);
         ventadm.setLocationRelativeTo(null);
         this.dispose();

@@ -2,15 +2,18 @@ package InterfazGrafica;
 
 import Logica.Administrador;
 import Logica.Cliente;
+import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 import javax.swing.JOptionPane;
 
 public class Principal extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
      
-    public Principal(GestorUsuarios gestorUsuarios) {
-        this.gestorUsuarios = gestorUsuarios; 
+    public Principal(GestorUsuarios gestorUsuarios,GestorEventos gestorEventos) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.gestorEventos = gestorEventos;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -129,14 +132,14 @@ public class Principal extends javax.swing.JFrame {
         if (gestorUsuarios.validarLoginCliente(correo, clave)) {
             Cliente cliente = gestorUsuarios.buscarClientePorCorreo(correo);
             JOptionPane.showMessageDialog(this, "Bienvenido, " + cliente.getNombre());
-            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios);
+            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos);
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
         } else if (gestorUsuarios.validarLoginAdministrador(correo, clave)) {
             Administrador admin = gestorUsuarios.buscarAdministradorPorCorreo(correo);
             JOptionPane.showMessageDialog(this, "Bienvenido administrador.");
-            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios);
+            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos);
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
@@ -150,7 +153,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios);
+        VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios, gestorEventos);
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
         this.dispose();

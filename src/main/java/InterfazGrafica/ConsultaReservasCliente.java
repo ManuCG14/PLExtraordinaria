@@ -1,11 +1,13 @@
 package InterfazGrafica;
 
+import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 
 
 public class ConsultaReservasCliente extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
 
     public ConsultaReservasCliente() {
         initComponents();
@@ -101,7 +103,7 @@ public class ConsultaReservasCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarReservasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios);
+        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos);
         ventclt.setVisible(true);
         ventclt.setLocationRelativeTo(null);
         this.dispose();

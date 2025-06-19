@@ -1,6 +1,7 @@
 package InterfazGrafica;
 
 import Logica.Cliente;
+import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 
 
@@ -8,9 +9,11 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
 
     private Cliente clienteActual;
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
 
-    public VentanaMenuCliente(GestorUsuarios gestorUsuarios) {
+    public VentanaMenuCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
         this.gestorUsuarios = gestorUsuarios;
+        this.gestorEventos = gestorEventos;
         this.clienteActual = clienteActual;
         initComponents();
     }
@@ -136,7 +139,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarEventosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Principal princ = new Principal(gestorUsuarios);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();

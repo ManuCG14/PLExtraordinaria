@@ -30,7 +30,7 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI Semibold", 0, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 0, 24)); // NOI18N
         jLabel1.setText("Administrador");
 
         btnGestionEventos.setFont(new java.awt.Font("Segoe UI Semibold", 0, 14)); // NOI18N
@@ -108,7 +108,7 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultaUsuarios)
                     .addComponent(btnGestionEventos))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnConsultaEventos)
                     .addComponent(btnConsultaReservas))

@@ -26,7 +26,7 @@ public class BuscarEventos extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tablaEventos.getModel();
         modelo.setRowCount(0);  // Limpiar tabla
         for (Evento e : eventos) {
-            modelo.addRow(new Object[]{e.getTitulo(), e.getTipo(), e.getDireccion().getCiudad()});
+            modelo.addRow(new Object[]{e.getTitulo(), e.getTipo(), e.getDireccion().getCiudad(), e.getPrecio()});
         }
     }
 
@@ -85,13 +85,13 @@ public class BuscarEventos extends javax.swing.JFrame {
 
         tablaEventos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Titulo", "Tipo", "Ciudad"
+                "Titulo", "Tipo", "Ciudad", "Precio(€)"
             }
         ));
         jScrollPane1.setViewportView(tablaEventos);

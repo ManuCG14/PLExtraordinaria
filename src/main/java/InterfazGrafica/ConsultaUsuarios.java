@@ -1,8 +1,12 @@
 package InterfazGrafica;
 
+import Logica.Administrador;
 import Logica.Cliente;
 import Logica.GestorEventos;
 import Logica.GestorUsuarios;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
 
 
 public class ConsultaUsuarios extends javax.swing.JFrame {
@@ -11,8 +15,12 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private GestorEventos gestorEventos;
     private Cliente clienteActual;
 
-    public ConsultaUsuarios() {
+    public ConsultaUsuarios(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.gestorEventos = gestorEventos;
+        this.clienteActual = clienteActual;
         initComponents();
+        setLocationRelativeTo(null);
     }
 
 
@@ -129,12 +137,45 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnMostrarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarTodosActionPerformed
-        // TODO add your handling code here:
+        List<Cliente> clientes = gestorUsuarios.listarClientes();
+        List<Administrador> administradores = gestorUsuarios.listarAdministradores();
+
+        List<Object[]> datos = new ArrayList<>();
+
+        for (Cliente c : clientes) {
+            datos.add(new Object[]{c.getNombre(), c.getCorreo(), "Cliente"});
+        }
+        for (Administrador a : administradores) {
+            datos.add(new Object[]{a.getCorreo(), a.getCorreo(), "Administrador"}); // asumimos que nombre = correo para administradores
+        }
+
+        cargarTabla(datos);
     }//GEN-LAST:event_btnMostrarTodosActionPerformed
 
     private void btnBuscarCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarCorreoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnBuscarCorreoActionPerformed
+        String correo = txtBuscar.getText().trim();
+        if (correo.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Por favor ingrese un correo.");
+            return;
+        }
+
+        List<Object[]> resultado = new ArrayList<>();
+
+        Cliente c = gestorUsuarios.buscarClientePorCorreo(correo);
+        if (c != null) {
+            resultado.add(new Object[]{c.getNombre(), c.getCorreo(), "Cliente"});
+        } else {
+            Administrador a = gestorUsuarios.buscarAdministradorPorCorreo(correo);
+            if (a != null) {
+                resultado.add(new Object[]{a.getCorreo(), a.getCorreo(), "Administrador"});
+            }
+        }
+
+        if (resultado.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontró ningún usuario con ese correo.");
+        } else {
+            cargarTabla(resultado);
+        }    }//GEN-LAST:event_btnBuscarCorreoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, clienteActual);
@@ -142,7 +183,16 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
         ventadm.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
+    private void cargarTabla(List<Object[]> filas) {
+        String[] columnas = {"Nombre", "Correo", "Tipo"};
+        Object[][] datos = new Object[filas.size()][3];
 
+        for (int i = 0; i < filas.size(); i++) {
+            datos[i] = filas.get(i);
+        }
+
+        tablaUsuarios.setModel(new javax.swing.table.DefaultTableModel(datos, columnas));
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

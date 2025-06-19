@@ -8,16 +8,19 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import Logica.Direccion;
+import Logica.GestorReservas;
 
 public class GestionEventos extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
     private Cliente clienteActual;
     
     public GestionEventos(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos; 
+        this.gestorReservas = gestorReservas;
         initComponents();
         cargarTablaEventos();
     }
@@ -218,7 +221,7 @@ public class GestionEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, clienteActual);
+        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         ventadm.setVisible(true);
         ventadm.setLocationRelativeTo(null);
         this.dispose();

@@ -2,6 +2,7 @@ package InterfazGrafica;
 
 import Logica.Cliente;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
 import javax.swing.JOptionPane;
 
@@ -11,11 +12,13 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     private Cliente clienteActual;
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
 
-    public VentanaMenuCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
+    public VentanaMenuCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos,GestorReservas gestorReservas, Cliente clienteActual) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
         this.clienteActual = clienteActual;
+        this.gestorReservas = gestorReservas;
         initComponents();
     }
 
@@ -140,7 +143,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarEventosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Principal princ = new Principal(gestorUsuarios, gestorEventos);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos, gestorReservas);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();
@@ -162,7 +165,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
 
     private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
         try {
-        ModificarDatosPersonales modificar = new ModificarDatosPersonales(gestorUsuarios, gestorEventos, clienteActual);
+        ModificarDatosPersonales modificar = new ModificarDatosPersonales(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         modificar.setVisible(true);
         modificar.setLocationRelativeTo(null);
         this.dispose();

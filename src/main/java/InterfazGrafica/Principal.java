@@ -3,6 +3,7 @@ package InterfazGrafica;
 import Logica.Administrador;
 import Logica.Cliente;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
 import javax.swing.JOptionPane;
 
@@ -10,12 +11,14 @@ public class Principal extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
     private Cliente clienteActual;
      
-    public Principal(GestorUsuarios gestorUsuarios,GestorEventos gestorEventos) {
+    public Principal(GestorUsuarios gestorUsuarios,GestorEventos gestorEventos, GestorReservas gestorReservas) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
         this.clienteActual = clienteActual;
+        this.gestorReservas = gestorReservas;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -135,14 +138,14 @@ public class Principal extends javax.swing.JFrame {
             Cliente cliente = gestorUsuarios.buscarClientePorCorreo(correo);
             this.clienteActual = cliente;
             JOptionPane.showMessageDialog(this, "Bienvenido, " + cliente.getNombre());
-            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos, cliente);
+            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos,gestorReservas, cliente);
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
         } else if (gestorUsuarios.validarLoginAdministrador(correo, clave)) {
             Administrador admin = gestorUsuarios.buscarAdministradorPorCorreo(correo);
             JOptionPane.showMessageDialog(this, "Bienvenido administrador.");
-            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, null); // Administrador no necesita Cliente
+            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, gestorReservas, null); // Administrador no necesita Cliente
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
@@ -156,7 +159,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios, gestorEventos, clienteActual);
+        VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
         this.dispose();

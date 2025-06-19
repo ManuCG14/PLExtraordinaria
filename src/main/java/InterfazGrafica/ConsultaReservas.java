@@ -1,19 +1,53 @@
 package InterfazGrafica;
 
 import Logica.Cliente;
+import Logica.Evento;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
+import Logica.Reserva;
+
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 
 public class ConsultaReservas extends javax.swing.JFrame {
 
-    private GestorUsuarios gestorUsuarios;
+    private GestorReservas gestorReservas;
     private GestorEventos gestorEventos;
     private Cliente clienteActual;
+    private GestorUsuarios gestorUsuarios;
     
-    public ConsultaReservas() {
+    public ConsultaReservas(GestorUsuarios gestorUsuarios, GestorReservas gestorReservas, GestorEventos gestorEventos, Cliente clienteActual) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.gestorReservas = gestorReservas;  
+        this.gestorEventos = gestorEventos;
+        this.clienteActual = clienteActual;
         initComponents();
+        cargarReservas();
     }
+    private void cargarReservas() {
+        DefaultTableModel model = (DefaultTableModel) tablaReservas.getModel();
+        model.setRowCount(0);  // Limpiar tabla
+
+        List<Reserva> reservas = gestorReservas.getReservas();
+
+        for (Reserva r : reservas) {
+            Cliente c = r.getCliente();
+            Evento e = r.getEvento();
+
+            Object[] fila = new Object[] {
+                c.getNombre(),
+                c.getCorreo(),
+                c.isEsVIP() ? "Sí" : "No",
+                e.getTitulo(),
+                r.getCantidadEntradas(),
+                r.getImporteTotal()
+        };
+        model.addRow(fila);
+    }
+}
+
 
 
     @SuppressWarnings("unchecked")
@@ -86,7 +120,7 @@ public class ConsultaReservas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, clienteActual);
+        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         ventadm.setVisible(true);
         ventadm.setLocationRelativeTo(null);
         this.dispose();

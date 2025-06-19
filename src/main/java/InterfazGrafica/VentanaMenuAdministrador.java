@@ -3,14 +3,17 @@ package InterfazGrafica;
 import Logica.Cliente;
 import Logica.GestorUsuarios;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 
 public class VentanaMenuAdministrador extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
     private Cliente clienteActual;
+    private GestorReservas gestorReservas;
 
-    public VentanaMenuAdministrador(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteactual) {
+    public VentanaMenuAdministrador(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, GestorReservas gestorReservas, Cliente clienteActual) {
+    this.gestorReservas = gestorReservas;
     this.gestorUsuarios = gestorUsuarios;
     this.gestorEventos = gestorEventos;
     this.clienteActual = clienteActual;
@@ -139,7 +142,7 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGestionEventosActionPerformed
 
     private void btnConsultaReservasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultaReservasActionPerformed
-        ConsultaReservas consultaReservas = new ConsultaReservas();
+        ConsultaReservas consultaReservas = new ConsultaReservas(gestorUsuarios, gestorReservas, gestorEventos, clienteActual);
         consultaReservas.setVisible(true);
         consultaReservas.setLocationRelativeTo(null);
         this.dispose();
@@ -153,7 +156,7 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btnConsultaEventosActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        Principal princ = new Principal(gestorUsuarios, gestorEventos);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos, gestorReservas);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();

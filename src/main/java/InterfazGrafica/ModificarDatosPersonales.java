@@ -2,6 +2,7 @@ package InterfazGrafica;
 
 import Logica.Cliente;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
 import javax.swing.JOptionPane;
 
@@ -10,11 +11,13 @@ public class ModificarDatosPersonales extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
     private Cliente clienteActual;
     
-    public ModificarDatosPersonales(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
+    public ModificarDatosPersonales(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, GestorReservas gestorReservas, Cliente clienteActual) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
+        this.gestorReservas = gestorReservas;
         this.clienteActual = clienteActual;
         initComponents();
         this.setLocationRelativeTo(null);
@@ -347,7 +350,7 @@ public class ModificarDatosPersonales extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos, clienteActual);
+        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         ventclt.setVisible(true);
         ventclt.setLocationRelativeTo(null);
         this.dispose();

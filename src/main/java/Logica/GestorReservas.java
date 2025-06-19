@@ -25,8 +25,8 @@ public class GestorReservas {
 
         Reserva nuevaReserva = new Reserva(cliente, evento, fechaSeleccionada, cantidadEntradas, importeTotal);
         reservas.add(nuevaReserva);
-
-        PersistenciaReservas.guardarReservas(reservas); // Guardar en archivo
+        System.out.println("Reserva añadida. Total reservas ahora: " + reservas.size());
+        PersistenciaReservas.guardarReservas(reservas); 
     }
 
     // Consultar todas las reservas

@@ -3,6 +3,7 @@ package InterfazGrafica;
 import Logica.Cliente;
 import Logica.Direccion;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
 import Logica.TarjetaCredito;
 import javax.swing.JOptionPane;
@@ -11,11 +12,13 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
     private Cliente clienteActual;
     
-    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
+    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos,GestorReservas gestorReservas, Cliente clienteActual) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
+        this.gestorReservas = gestorReservas;
         this.clienteActual = clienteActual;
         initComponents();
     }
@@ -359,7 +362,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     // Registrar cliente
     if (gestorUsuarios.registrarCliente(nuevoCliente)) {
         JOptionPane.showMessageDialog(this, "Registro exitoso", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-        Principal princ = new Principal(gestorUsuarios, gestorEventos);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos, gestorReservas);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();
@@ -369,7 +372,7 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRegistarseActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        Principal princ = new Principal(gestorUsuarios, gestorEventos);
+        Principal princ = new Principal(gestorUsuarios, gestorEventos, gestorReservas);
         princ.setVisible(true);
         princ.setLocationRelativeTo(null);
         this.dispose();

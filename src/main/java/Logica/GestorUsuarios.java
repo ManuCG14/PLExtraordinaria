@@ -68,16 +68,16 @@ public class GestorUsuarios {
         return false;
     }
 
-    public boolean modificarCliente(String correoOriginal, Cliente clienteModificado) {
+    public void modificarCliente(Cliente clienteModificado) {
         for (int i = 0; i < clientes.size(); i++) {
-            if (clientes.get(i).getCorreo().equalsIgnoreCase(correoOriginal)) {
-                clientes.set(i, clienteModificado);
-                PersistenciaClientes.guardarClientes(clientes);
-                return true;
-            }
+            Cliente actual = clientes.get(i);
+            if (actual.getCorreo().equals(clienteModificado.getCorreo())) {
+                 clientes.set(i, clienteModificado);
+                break;
         }
-        return false;
     }
+}
+
 
     public boolean eliminarCliente(String correo) {
         for (int i = 0; i < clientes.size(); i++) {

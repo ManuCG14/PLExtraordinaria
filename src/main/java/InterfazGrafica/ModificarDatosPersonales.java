@@ -1,18 +1,40 @@
 package InterfazGrafica;
 
+import Logica.Cliente;
 import Logica.GestorEventos;
 import Logica.GestorUsuarios;
+import javax.swing.JOptionPane;
 
 
 public class ModificarDatosPersonales extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private Cliente clienteActual;
     
-    public ModificarDatosPersonales() {
+    public ModificarDatosPersonales(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
+        this.gestorUsuarios = gestorUsuarios;
+        this.gestorEventos = gestorEventos;
+        this.clienteActual = clienteActual;
         initComponents();
+        this.setLocationRelativeTo(null);
+        cargarDatosCliente();
     }
 
+    private void cargarDatosCliente() {
+        txtNombre.setText(clienteActual.getNombre());
+        txtCorreo.setText(clienteActual.getCorreo());
+        txtClave.setText(clienteActual.getClave());
+        txtTelefono.setText(clienteActual.getTelefono());
+        txtCalle.setText(clienteActual.getDireccion().getCalle());
+        txtCiudad.setText(clienteActual.getDireccion().getCiudad());
+        txtCodigoPostal.setText(clienteActual.getDireccion().getCodigo_postal());
+        txtNombreTitular.setText(clienteActual.getTarjeta().getNombreTitular());
+        txtNumeroTarjeta.setText(clienteActual.getTarjeta().getNumero());
+        txtFechaCaducidad.setText(clienteActual.getTarjeta().getFechaCaducidad());
+
+        checkVip.setSelected(clienteActual.isEsVIP());
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -369,7 +391,20 @@ public class ModificarDatosPersonales extends javax.swing.JFrame {
     }//GEN-LAST:event_checkVipActionPerformed
 
     private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
-        // TODO add your handling code here:
+    clienteActual.setNombre(txtNombre.getText());
+    clienteActual.setCorreo(txtCorreo.getText());
+    clienteActual.setClave(new String(txtClave.getPassword()));
+    clienteActual.setTelefono(txtTelefono.getText());
+    clienteActual.setEsVIP(checkVip.isSelected());
+    clienteActual.getDireccion().setCalle(txtCalle.getText());
+    clienteActual.getDireccion().setCiudad(txtCiudad.getText());
+    clienteActual.getDireccion().setCodigo_postal(txtCodigoPostal.getText());
+    clienteActual.getTarjeta().setNombreTitular(txtNombreTitular.getText());
+    clienteActual.getTarjeta().setNumero(txtNumeroTarjeta.getText());
+    clienteActual.getTarjeta().setFechaCaducidad(txtFechaCaducidad.getText());
+
+    gestorUsuarios.modificarCliente(clienteActual); 
+    JOptionPane.showMessageDialog(this, "Datos modificados correctamente");
     }//GEN-LAST:event_btnModificarActionPerformed
 
 

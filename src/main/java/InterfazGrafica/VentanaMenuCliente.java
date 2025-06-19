@@ -160,7 +160,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReseñasActionPerformed
 
     private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
-        ModificarDatosPersonales modificar = new ModificarDatosPersonales();
+        ModificarDatosPersonales modificar = new ModificarDatosPersonales(gestorUsuarios, gestorEventos, clienteActual);
         modificar.setVisible(true);
         modificar.setLocationRelativeTo(null);
         this.dispose();

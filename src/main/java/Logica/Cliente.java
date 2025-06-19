@@ -61,4 +61,6 @@ public class Cliente extends Usuario {
         this.tarjeta = tarjeta;
         this.esVIP = esVIP;
     }
+    
+    
 }

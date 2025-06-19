@@ -26,15 +26,22 @@ public class ModificarDatosPersonales extends javax.swing.JFrame {
         txtCorreo.setText(clienteActual.getCorreo());
         txtClave.setText(clienteActual.getClave());
         txtTelefono.setText(clienteActual.getTelefono());
-        txtCalle.setText(clienteActual.getDireccion().getCalle());
-        txtCiudad.setText(clienteActual.getDireccion().getCiudad());
-        txtCodigoPostal.setText(clienteActual.getDireccion().getCodigo_postal());
-        txtNombreTitular.setText(clienteActual.getTarjeta().getNombreTitular());
-        txtNumeroTarjeta.setText(clienteActual.getTarjeta().getNumero());
-        txtFechaCaducidad.setText(clienteActual.getTarjeta().getFechaCaducidad());
 
-        checkVip.setSelected(clienteActual.isEsVIP());
+        if (clienteActual.getDireccion() != null) {
+            txtCalle.setText(clienteActual.getDireccion().getCalle());
+            txtCiudad.setText(clienteActual.getDireccion().getCiudad());
+            txtCodigoPostal.setText(clienteActual.getDireccion().getCodigo_postal());
+    }
+
+        if (clienteActual.getTarjeta() != null) {
+            txtNombreTitular.setText(clienteActual.getTarjeta().getNombreTitular());
+            txtNumeroTarjeta.setText(clienteActual.getTarjeta().getNumero());
+            txtFechaCaducidad.setText(clienteActual.getTarjeta().getFechaCaducidad());
+    }
+
+    checkVip.setSelected(clienteActual.isEsVIP());
 }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

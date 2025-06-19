@@ -129,19 +129,20 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarSesionActionPerformed
         String correo = txtCorreo.getText();
-        String clave = txtContraseña.getText();
+        String clave = new String(txtContraseña.getPassword());
 
         if (gestorUsuarios.validarLoginCliente(correo, clave)) {
             Cliente cliente = gestorUsuarios.buscarClientePorCorreo(correo);
+            this.clienteActual = cliente;
             JOptionPane.showMessageDialog(this, "Bienvenido, " + cliente.getNombre());
-            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos, clienteActual);
+            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos, cliente);
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
         } else if (gestorUsuarios.validarLoginAdministrador(correo, clave)) {
             Administrador admin = gestorUsuarios.buscarAdministradorPorCorreo(correo);
             JOptionPane.showMessageDialog(this, "Bienvenido administrador.");
-            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, clienteActual);
+            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, null); // Administrador no necesita Cliente
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();

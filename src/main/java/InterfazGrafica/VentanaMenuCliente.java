@@ -3,6 +3,7 @@ package InterfazGrafica;
 import Logica.Cliente;
 import Logica.GestorEventos;
 import Logica.GestorUsuarios;
+import javax.swing.JOptionPane;
 
 
 public class VentanaMenuCliente extends javax.swing.JFrame {
@@ -160,10 +161,15 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReseñasActionPerformed
 
     private void btnModificarDatosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarDatosActionPerformed
+        try {
         ModificarDatosPersonales modificar = new ModificarDatosPersonales(gestorUsuarios, gestorEventos, clienteActual);
         modificar.setVisible(true);
         modificar.setLocationRelativeTo(null);
         this.dispose();
+    } catch (Exception e) {
+        e.printStackTrace();
+        JOptionPane.showMessageDialog(this, "Error al abrir ventana: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnModificarDatosActionPerformed
 
 

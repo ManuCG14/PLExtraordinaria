@@ -11,10 +11,12 @@ public class VentanaRegistroCliente extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private Cliente clienteActual;
     
-    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
+    public VentanaRegistroCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
+        this.clienteActual = clienteActual;
         initComponents();
     }
 

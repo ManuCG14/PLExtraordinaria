@@ -10,10 +10,12 @@ public class Principal extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private Cliente clienteActual;
      
     public Principal(GestorUsuarios gestorUsuarios,GestorEventos gestorEventos) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
+        this.clienteActual = clienteActual;
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -132,14 +134,14 @@ public class Principal extends javax.swing.JFrame {
         if (gestorUsuarios.validarLoginCliente(correo, clave)) {
             Cliente cliente = gestorUsuarios.buscarClientePorCorreo(correo);
             JOptionPane.showMessageDialog(this, "Bienvenido, " + cliente.getNombre());
-            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos);
+            VentanaMenuCliente ventana = new VentanaMenuCliente(gestorUsuarios, gestorEventos, clienteActual);
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
         } else if (gestorUsuarios.validarLoginAdministrador(correo, clave)) {
             Administrador admin = gestorUsuarios.buscarAdministradorPorCorreo(correo);
             JOptionPane.showMessageDialog(this, "Bienvenido administrador.");
-            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos);
+            VentanaMenuAdministrador ventana = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, clienteActual);
             ventana.setVisible(true);
             ventana.setLocationRelativeTo(null);
             this.dispose();
@@ -153,7 +155,7 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCorreoActionPerformed
 
     private void btnRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarseActionPerformed
-        VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios, gestorEventos);
+        VentanaRegistroCliente ventana = new VentanaRegistroCliente(gestorUsuarios, gestorEventos, clienteActual);
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(null);
         this.dispose();

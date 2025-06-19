@@ -11,7 +11,7 @@ public class VentanaMenuCliente extends javax.swing.JFrame {
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
 
-    public VentanaMenuCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
+    public VentanaMenuCliente(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
         this.clienteActual = clienteActual;

@@ -1,5 +1,6 @@
 package InterfazGrafica;
 
+import Logica.Cliente;
 import Logica.GestorUsuarios;
 import Logica.GestorEventos;
 
@@ -7,10 +8,12 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private Cliente clienteActual;
 
-    public VentanaMenuAdministrador(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos) {
+    public VentanaMenuAdministrador(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteactual) {
     this.gestorUsuarios = gestorUsuarios;
     this.gestorEventos = gestorEventos;
+    this.clienteActual = clienteActual;
     initComponents();
 }
     @SuppressWarnings("unchecked")

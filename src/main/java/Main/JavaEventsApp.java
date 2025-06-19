@@ -1,6 +1,7 @@
 package Main;
 
 import InterfazGrafica.Principal;
+import Logica.Cliente;
 import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 

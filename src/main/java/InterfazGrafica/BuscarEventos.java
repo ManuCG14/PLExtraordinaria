@@ -223,7 +223,7 @@ public class BuscarEventos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtBuscarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos);
+        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos, clienteActual);
         ventclt.setVisible(true);
         ventclt.setLocationRelativeTo(null);
         this.dispose();

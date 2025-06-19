@@ -1,5 +1,6 @@
 package InterfazGrafica;
 
+import Logica.Cliente;
 import Logica.GestorEventos;
 import Logica.GestorUsuarios;
 
@@ -7,6 +8,7 @@ public class Reseñas extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private Cliente clienteActual;
 
     public Reseñas() {
         initComponents();
@@ -113,7 +115,7 @@ public class Reseñas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtComentarioActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos);
+        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos, clienteActual);
         ventclt.setVisible(true);
         ventclt.setLocationRelativeTo(null);
         this.dispose();

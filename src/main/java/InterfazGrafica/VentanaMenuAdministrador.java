@@ -1,11 +1,12 @@
 package InterfazGrafica;
 
 import Logica.GestorUsuarios;
-
+import Logica.GestorEventos;
 
 public class VentanaMenuAdministrador extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
+    private GestorEventos gestorEventos;
 
     public VentanaMenuAdministrador(GestorUsuarios gestorUsuarios) {
         this.gestorUsuarios = gestorUsuarios;
@@ -130,7 +131,7 @@ public class VentanaMenuAdministrador extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGestionEventosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionEventosActionPerformed
-        GestionEventos gestionEventos = new GestionEventos();
+        GestionEventos gestionEventos = new GestionEventos(gestorUsuarios, gestorEventos);
         gestionEventos.setVisible(true);
         gestionEventos.setLocationRelativeTo(null);
         this.dispose();

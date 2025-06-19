@@ -6,6 +6,7 @@ import Logica.GestorUsuarios;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import Logica.Direccion;
 
 public class GestionEventos extends javax.swing.JFrame {
 
@@ -177,7 +178,7 @@ public class GestionEventos extends javax.swing.JFrame {
             return;
         }
 
-        Evento nuevo = new Evento(titulo, tipo, precio, new Logica.Direccion(ciudad));
+        Evento nuevo = new Evento(titulo, tipo, precio, new Direccion(ciudad));
         gestorEventos.agregarEvento(nuevo);
         cargarTablaEventos();
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -203,7 +204,7 @@ public class GestionEventos extends javax.swing.JFrame {
             return;
         }
 
-        Evento modificado = new Evento(nuevoTitulo, tipo, precio, new Logica.Direccion(ciudad));
+        Evento modificado = new Evento(nuevoTitulo, tipo, precio, new Direccion(ciudad));
         boolean resultado = gestorEventos.modificarEvento(tituloOriginal, modificado);
 
         if (resultado) {

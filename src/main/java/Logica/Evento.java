@@ -25,6 +25,13 @@ public class Evento implements Serializable {
         this.reseñas = new ArrayList<>();
     }
 
+    public Evento(String titulo, String tipo, double precio, Direccion direccion) {
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.direccion = direccion;
+        this.precio = precio;
+    }
+
     public void añadirFecha(LocalDateTime fecha) {
         fechas.add(fecha);
     }

@@ -59,8 +59,7 @@ public class Reserva implements Serializable {
         this.fechaReserva = fechaReserva;
     }
     
-    public Reserva(Cliente cliente, Evento evento, LocalDateTime fechaSeleccionada,
-                   int cantidadEntradas, double importeTotal) {
+    public Reserva(Cliente cliente, Evento evento, int cantidadEntradas, double importeTotal) {
         this.cliente = cliente;
         this.evento = evento;
         this.fechaSeleccionada = fechaSeleccionada;

@@ -55,6 +55,5 @@ public class Direccion implements Serializable {
 
     public Direccion(String ciudad) {
         this.ciudad = ciudad;
-    }
-    
+    }   
 }

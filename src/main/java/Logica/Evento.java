@@ -110,4 +110,3 @@ public class Evento implements Serializable {
         this.imagenPortada = imagenPortada;
     }
 }
-

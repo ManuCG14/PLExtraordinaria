@@ -24,7 +24,6 @@ public class Cliente extends Usuario {
         this.tarjeta = tarjeta;
     }
 
-
     public Direccion getDireccion() {
         return direccion;
     }
@@ -51,7 +50,6 @@ public class Cliente extends Usuario {
         this.nombre = nombre;
     }
 
-
     public Cliente(String nombre, String correo, String clave, String telefono, Direccion direccion,
                    TarjetaCredito tarjeta, boolean esVIP) {
         super(correo, clave);
@@ -60,8 +58,5 @@ public class Cliente extends Usuario {
         this.direccion = direccion;
         this.tarjeta = tarjeta;
         this.esVIP = esVIP;
-    }
-
-
-    
+    }  
 }

@@ -3,6 +3,7 @@ package InterfazGrafica;
 import Logica.Administrador;
 import Logica.Cliente;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +15,12 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
     private Cliente clienteActual;
+    private GestorReservas gestorReservas;
 
     public ConsultaUsuarios(GestorUsuarios gestorUsuarios, GestorEventos gestorEventos, Cliente clienteActual) {
         this.gestorUsuarios = gestorUsuarios;
         this.gestorEventos = gestorEventos;
+        this.gestorReservas = gestorReservas;
         this.clienteActual = clienteActual;
         initComponents();
         setLocationRelativeTo(null);
@@ -178,7 +181,7 @@ public class ConsultaUsuarios extends javax.swing.JFrame {
         }    }//GEN-LAST:event_btnBuscarCorreoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, clienteActual);
+        VentanaMenuAdministrador ventadm = new VentanaMenuAdministrador(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         ventadm.setVisible(true);
         ventadm.setLocationRelativeTo(null);
         this.dispose();

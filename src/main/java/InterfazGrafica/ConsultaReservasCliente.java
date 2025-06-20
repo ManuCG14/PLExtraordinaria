@@ -2,18 +2,20 @@ package InterfazGrafica;
 
 import Logica.Cliente;
 import Logica.GestorEventos;
+import Logica.GestorReservas;
 import Logica.GestorUsuarios;
-
 
 public class ConsultaReservasCliente extends javax.swing.JFrame {
 
     private GestorUsuarios gestorUsuarios;
     private GestorEventos gestorEventos;
+    private GestorReservas gestorReservas;
     private Cliente clienteActual;
 
     public ConsultaReservasCliente() {
         initComponents();
     }
+
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -105,7 +107,7 @@ public class ConsultaReservasCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMostrarReservasActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos, clienteActual);
+        VentanaMenuCliente ventclt = new VentanaMenuCliente(gestorUsuarios, gestorEventos, gestorReservas, clienteActual);
         ventclt.setVisible(true);
         ventclt.setLocationRelativeTo(null);
         this.dispose();
